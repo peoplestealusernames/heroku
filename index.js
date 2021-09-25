@@ -6,7 +6,8 @@ const PORT = process.env.PORT;
 
 app.get("/", (req, res) =>
 {
-    res.json(req.connection.remoteAddress);
+    var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
+    res.json(ip);
 });
 
 app.listen(PORT, () =>
